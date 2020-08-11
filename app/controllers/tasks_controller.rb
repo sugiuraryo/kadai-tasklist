@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [:show, :edit, :update, :destroy]
     before_action :require_user_logged_in
-    before_action :correct_user, only: [:update, :edit, :destroy]
+    before_action :correct_user, only: [:show, :update, :edit, :destroy]
     def index
         @tasks = current_user.tasks.order(id: :desc)
     end
@@ -19,7 +18,6 @@ class TasksController < ApplicationController
             flash[:success] = "タスクが正常に追加されました"
             redirect_to @task
         else
-            @tasks = current_user.tasks.(id: :desc)
             flash.now[:danger] = "タスクが追加されませんでした"
             render :new
         end
@@ -32,7 +30,7 @@ class TasksController < ApplicationController
     def update
         
         if @task.update(task_params)
-            flash[:succsess] = "タスクは正常に更新されました"
+            flash[:success] = "タスクは正常に更新されました"
             redirect_to @task
         else
             flash[:danger] = "タスクは更新されませんでした"
@@ -49,9 +47,7 @@ class TasksController < ApplicationController
     
     private
     
-    def set_task
-        @task = Task.find(params[:id])
-    end    
+   
 
     def task_params
        params.require(:task).permit(:content, :status) 

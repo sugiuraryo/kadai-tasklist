@@ -4,16 +4,12 @@
         <button class="navbar-toggler" type="button" data-toggle="collapase" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+        <% if logged_in? %>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                   <li class="nav-item dropdown">
-                       <ul class="dropdown-menu dropdown-menu-right">
-                           <li class="dropdown-divider"></li>
-                           <li class="dropdown-item"><%= link_to "Logout", logout_path, method: :delete %></li>
-                       </ul>
-                   </li> 
+                <ul class="navbar-nav navbar-brand">
+                           <li class="nav-item"><%= link_to "Logout", logout_path, method: :delete %></li>
                 </ul>
         </div>
+        <% end %>
     </nav>
 </header>
